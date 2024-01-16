@@ -1,0 +1,1 @@
+## To run, in terminal type "node server.js"

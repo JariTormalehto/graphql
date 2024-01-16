@@ -1,0 +1,48 @@
+# queries.graphql
+
+# Basic User Information
+query UserProfile {
+  user {
+    id
+    login
+  }
+}
+
+# XP amount
+query UserXPAmount {
+  transaction_aggregate(where: { userId: { _eq: 1 }, type: { _eq: "xp" } }) {
+    aggregate {
+      sum {
+        amount
+      }
+    }
+  }
+}
+
+# Grades
+query UserGrades {
+  progress(where: { userId: { _eq: 1 } }) {
+    objectId
+    grade
+    createdAt
+  }
+}
+
+# Audits
+query UserAudits {
+  # Assuming 'progress' has the required information
+  progress(where: { userId: { _eq: 1 }, grade: { _eq: 1 } }) {
+    id
+    createdAt
+  }
+}
+
+# Skills
+query UserSkills {
+  # Assuming there is a table for skills related to the user
+  user_skills(where: { userId: { _eq: 1 } }) {
+    id
+    skillName
+    proficiency
+  }
+}
